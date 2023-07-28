@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&display=swap');
+  </style>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="left-side">
+    <div class="left-side-nav">
+      <div class="side-bar">
+        <div class="side-bar-content">
+          <div class="x" onclick="openSideBar()">
+            <div>X</div>
+          </div>
+          <div class="light-dark">Mode</div>
+        </div>
+      </div>
+      <div class="hamburger" onclick="openSideBar()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="website-title-container">
+        <div class="website-title">EXPEN$E TRACKER</div>
+      </div>
+    </div>
+    <div class="left-side-tabs-container">
+      <div class="tab" id="total-tab">Total</div>
+      <div class="tab" id="goals-tab">Goals</div>
+      <div class="tab" id="overview-tab">Overview</div>
+    </div>
+    <div class="total-container">
+      <div class="balance-title">BALANCE</div>
+      <div class="balance"><span id="current-balance"></span></div>
+      <div class="balance-description-container">
+        <div class="balance-description" id="positive">You are in the positive, keep it up!</div>
+        <div class="balance-description" id="negative">You are in the negative, watch out!</div>
+      </div>
+    </div>
+    <div class="goals-container">
+      <div class="goal-title">Hold yourself responsible with a goal!</div>
+      <button class="goal-button">Make a goal</button>
+    </div>
+    <div class="overview-container">
+      <div class="category-container" id="work">
+        <div class="category">Work</div>
+        <div>$<span>0</span></div>
+      </div>
+      <div class="category-container" id="shopping">
+        <div class="category">Shopping</div>
+        <div>$<span>0</span></div>
+      </div>
+      <div class="category-container" id="entertainment">
+        <div class="category">Entertainment</div>
+        <div>$<span>0</span></div>
+      </div>
+      <div class="category-container" id="miscellaneous">
+        <div class="category">Miscellaneous</div>
+        <div>$<span>0</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="normal-container">
+      <input type="text" class="search-bar" placeholder="Search for an expense">
+      <button class="add-expense-btn" onclick="openExpenseEditor()">Add an expense</button>
+    </div>
+    <div class="input-container">
+      <div class="up-arrow">&uarr;</div>
+      <div class="title-container">
+        <div class="title">Expense Title</div>
+        <input type="text" class="title-input" placeholder="Brief Description">
+      </div>
+      <div class="date-container">
+        <div class="title">Date</div>
+        <input type="date" class="date-input">
+      </div>
+      <div class="amount-container">
+        <div class="title">Amount</div>
+        <input type="text" class="amount-input" placeholder="Amount">
+      </div>
+      <div>
+        <select name="" id="" class="category-selection">
+          <option disabled selected>Category</option>
+          <option>Work</option>
+          <option>Shopping</option>
+          <option>Entertainment</option>
+          <option>Miscellaneous</option>
+        </select>
+      </div>
+      <div>
+        <button class="add-btn">Add</button>
+      </div>
+    </div>
+    <div class="expense-container">
+      <ul class="list-container">
+        <li class="expense">
+          <span class="expense-info">
+          <span>HOA payment</span>
+          <span>07/28/2023</span>
+          <span>-$20</span>
+        </span>
+          <span class="x-btn">X</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
