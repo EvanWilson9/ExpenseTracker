@@ -271,6 +271,23 @@ body {
   font-size: 18px;
 }
 
+.work {
+  background-color: #c3f7c8;
+}
+
+.shopping {
+  background-color: #fff7a1;
+
+}
+
+.entertainment {
+  background-color: #fe7070;
+}
+
+.miscellaneous {
+  background-color: #f4d9ff;
+}
+
 #work {
   background-color: #c3f7c8;
 }
@@ -357,27 +374,29 @@ body {
   border-radius: 9px;
   justify-content: space-between;
   margin-top:20px;
-  list-style-type: none;
-  background-color: #f4d9ff;
 }
 
 .work-expense {
   background-color: red;
 }
 
+span{
+  color:red;
+  cursor: pointer;
+  font-size:20px;
+}
+
+span:hover{
+  font-weight: bold;
+}
+
 .expense-info{
   display: flex;
   gap:150px;
-  margin-left:40px;
+  margin-left: 50px;;
 }
 
-.x-btn{
-  color:red;
-  cursor: pointer;
-  transition:0.4s ease;
-}
-
-.x-btn:hover{
-  font-weight: bold;
+.overview-number{
+  display: flex;
 }
 
