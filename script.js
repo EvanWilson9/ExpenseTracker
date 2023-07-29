@@ -19,25 +19,6 @@ const upArrow = document.querySelector('.up-arrow');
 
 let balanceValue = 0;
 
-if (balanceValue < 0) {
-  let negativeBalance = Math.abs(balanceValue);
-  currentBalance.innerHTML = "- " + "$" + negativeBalance;
-  balance.style.background = "#e3675e";
-}
-else if (balanceValue >= 0) {
-  currentBalance.innerHTML = "$" + balanceValue;
-  balance.style.background = "#a3ecac";
-}
-
-if (balanceValue >= 0) {
-  negativeMessage.style.display = "none";
-  positiveMessage.style.display = "flex";
-}
-else if (balanceValue < 0) {
-  negativeMessage.style.display = "flex";
-  positiveMessage.style.display = "none";
-}
-
 totalTab.onclick = function () {
   totalContainer.style.display = "flex";
   goalsContainer.style.display = "none";
@@ -95,7 +76,74 @@ const dateInput = document.querySelector('.date-input');
 const amountInput = document.querySelector('.amount-input');
 const categorySelection = document.querySelector('.category-selection');
 
-let expenseArray = [];
-const expenseContainer = document.querySelector('.expense-container');
+const list = document.querySelector('.expense-container');
 const addBtn = document.querySelector('.add-btn');
 //
+
+addBtn.addEventListener('click', (e)=>{
+  let infoArray = [];
+  const myLi = document.createElement('li');
+  myLi.classList.add('expense');
+
+  switch(categorySelection.value){
+    case "Work":
+      myLi.classList.add('work');
+      
+      break;
+    case "Shopping":
+      myLi.classList.add('shopping');
+      break;
+    case "Entertainment":
+      myLi.classList.add('entertainment');
+      break;
+    case "Miscellaneous":
+      myLi.classList.add('miscellaneous');
+      break;
+  }
+
+  myLi.innerHTML = `
+  <div class="expense-info">
+  <div>${titleInput.value}</div>
+  <div>${dateInput.value}</div>
+  <div>$${amountInput.value}</div>
+  </div>`
+
+  balanceValue += Number(amountInput.value);
+  if (balanceValue < 0) {
+    let negativeBalance = Math.abs(balanceValue);
+    currentBalance.innerHTML = "- " + "$" + negativeBalance;
+    balance.style.background = "#e3675e";
+  }
+  else if (balanceValue >= 0) {
+    currentBalance.innerHTML = "$" + balanceValue;
+    balance.style.background = "#a3ecac";
+  }
+  
+  if (balanceValue >= 0) {
+    negativeMessage.style.display = "none";
+    positiveMessage.style.display = "flex";
+  }
+  else if (balanceValue < 0) {
+    negativeMessage.style.display = "flex";
+    positiveMessage.style.display = "none";
+  }
+
+  list.appendChild(myLi);
+
+  const mySpan = document.createElement('span');
+  mySpan.innerHTML = "x";
+
+  myLi.appendChild(mySpan);
+
+  const close = document.querySelectorAll('span');
+  for(let i = 0; i < close.length; i++){
+    close[i].addEventListener('click', ()=>{
+      close[i].parentElement.style.display = "none";
+    });
+  }
+
+  titleInput.value = "";
+  dateInput.value = "";
+  amountInput.value = "";
+  categorySelection.value = "Category";
+});
