@@ -1,23 +1,15 @@
+//SEPERATE FROM BALANCE
+//
+//
+const sideBar = document.querySelector('.side-bar');
+const upArrow = document.querySelector('.up-arrow');
 const totalContainer = document.querySelector('.total-container');
 const goalsContainer = document.querySelector('.goals-container');
 const overviewContainer = document.querySelector('.overview-container');
-
 const totalTab = document.querySelector('#total-tab');
 const goalsTab = document.querySelector('#goals-tab');
 const overviewTab = document.querySelector('#overview-tab');
-
-let currentBalance = document.querySelector('#current-balance');
-
-const negativeMessage = document.querySelector('#negative');
-const positiveMessage = document.querySelector('#positive');
-
-const balance = document.querySelector('.balance');
-
 const inputContainer = document.querySelector('.input-container');
-const sideBar = document.querySelector('.side-bar');
-const upArrow = document.querySelector('.up-arrow');
-
-let balanceValue = 0;
 
 totalTab.onclick = function () {
   totalContainer.style.display = "flex";
@@ -64,86 +56,142 @@ function showHamburger(){
 upArrow.onclick = function () {
   inputContainer.style.display = "none";
 }
-
-let balanceDescript = document.querySelector('.balance-description-container');
-let balanceTitle = document.querySelector('.balance-title');
-
-const bodyElement = document.querySelector('body');
-
 //
+//
+//END OF SEPERATE FROM BALANCE
+
+
+//Btn that adds expense
+const btn = document.querySelector('.btn');
+//Number of balance displayed in circle
+let balanceAmount = document.querySelector('.balance-amount');
+//Either positive or negative message
+let balanceDescription = document.querySelector('.balance-description');
+//Background of balance circle (red / green)
+const balanceContainer = document.querySelector('.balanceContainer');
+//Container of add LI's
+const listContainer = document.querySelector('.list-container');
+/*Input elements (all)*/ 
 const titleInput = document.querySelector('.title-input');
 const dateInput = document.querySelector('.date-input');
 const amountInput = document.querySelector('.amount-input');
 const categorySelection = document.querySelector('.category-selection');
+/**/
+//Total Balance
+let balance = 0;
 
-const list = document.querySelector('.expense-container');
-const addBtn = document.querySelector('.add-btn');
-//
+btn.onclick = function(){
 
-addBtn.addEventListener('click', (e)=>{
-  let infoArray = [];
-  const myLi = document.createElement('li');
-  myLi.classList.add('expense');
+  if(titleInput.value === "" || dateInput.value === "" || amountInput.value === "" || categorySelection.value === 'Category'){
+    alert('Please fill in all entries.');
+    return;
+  }
 
-  switch(categorySelection.value){
+  const li = document.createElement('LI');
+
+  /*switch(categorySelection.value){
     case "Work":
-      myLi.classList.add('work');
-      
+      li.classList.add('work');
       break;
     case "Shopping":
-      myLi.classList.add('shopping');
+      li.classList.add('shopping');
       break;
     case "Entertainment":
-      myLi.classList.add('entertainment');
+      li.classList.add('entertainment');
       break;
     case "Miscellaneous":
-      myLi.classList.add('miscellaneous');
+      li.classList.add('miscellaneous');
       break;
+  }*/
+
+  let expenseAmount = amountInput.value;
+  let fixedExpense;
+
+  if(expenseAmount < 0){
+    fixedExpense = "-$" + Math.abs(expenseAmount); 
+  } else {
+    fixedExpense = "$" + expenseAmount;
   }
 
-  myLi.innerHTML = `
-  <div class="expense-info">
-  <div>${titleInput.value}</div>
-  <div>${dateInput.value}</div>
-  <div>$${amountInput.value}</div>
-  </div>`
+  balance = (balance*100 + (Number(amountInput.value) * 100)) / 100;
+  balanceAmount.innerHTML = balance;
 
-  balanceValue += Number(amountInput.value);
-  if (balanceValue < 0) {
-    let negativeBalance = Math.abs(balanceValue);
-    currentBalance.innerHTML = "- " + "$" + negativeBalance;
-    balance.style.background = "#e3675e";
+  if (balance < 0) {
+    let negativeBalance = Math.abs(balance);
+    balanceAmount.innerHTML = "- " + "$" + negativeBalance;
+    balanceContainer.style.background = "#e3675e";
   }
-  else if (balanceValue >= 0) {
-    currentBalance.innerHTML = "$" + balanceValue;
-    balance.style.background = "#a3ecac";
+  else if (balance > 0) {
+    balanceAmount.innerHTML = "$" + balance;
+    balanceContainer.style.background = "#a3ecac";
   }
   
-  if (balanceValue >= 0) {
-    negativeMessage.style.display = "none";
-    positiveMessage.style.display = "flex";
+  if (balance > 0) {
+    balanceDescription.innerHTML = "You are in the positive, keep it up!";
   }
-  else if (balanceValue < 0) {
-    negativeMessage.style.display = "flex";
-    positiveMessage.style.display = "none";
+  else if (balance < 0) {
+    balanceDescription.innerHTML = "You are in the negative, watch out!";
   }
 
-  list.appendChild(myLi);
+  li.innerHTML = 
+  `
+  <div class="expense">
+    <div>${titleInput.value}</div>
+    <div>${dateInput.value}</div>
+    <div>${fixedExpense}</div>
+  </div>
+  `;
 
-  const mySpan = document.createElement('span');
-  mySpan.innerHTML = "x";
+  listContainer.appendChild(li);
 
-  myLi.appendChild(mySpan);
-
-  const close = document.querySelectorAll('span');
-  for(let i = 0; i < close.length; i++){
-    close[i].addEventListener('click', ()=>{
-      close[i].parentElement.style.display = "none";
-    });
-  }
+  const span = document.createElement('SPAN');
+  span.innerHTML = "X";
+  li.appendChild(span);
 
   titleInput.value = "";
   dateInput.value = "";
   amountInput.value = "";
   categorySelection.value = "Category";
+};
+
+listContainer.addEventListener("click", function (e) {
+  e.target.parentElement.remove();
+  let word = e.target.parentElement.innerHTML;
+  console.log(word);
+  console.log(word.length);
+
+  let newAmount = "";
+  let newNum = "";
+  let newAmountNum = 0;
+  let count = 0;
+  for (let i = 0; i < word.length; i++) {
+    if (word.charAt(i) === "1" || word.charAt(i) === "2" || word.charAt(i) === "3" || word.charAt(i) === "4" || word.charAt(i) === "5" || word.charAt(i) === "6" || word.charAt(i) === "7" || word.charAt(i) === "8" || word.charAt(i) === "9" || word.charAt(i) === "0" || word.charAt(i) === "." || word.charAt(i) === "-") {
+      if(count === 10){
+        newAmount = "";
+      }
+      newNum = word.charAt(i);
+      newAmount += newNum;
+      console.log(newAmount);
+      count++;
+    }
+  }
+  newAmountNum = Number(newAmount);
+
+  if(newAmountNum > 0){
+    balance -= newAmountNum;
+    balanceAmount.innerHTML = balance;
+    console.log('hi');
+  }
+  else if(newAmountNum < 0){
+    balance -= newAmountNum;
+    balanceAmount.innerHTML = balance;
+    console.log('hello');
+  }
+
+  if(balance === 0){
+    balanceDescription.innerHTML = "";
+    balanceAmount.innerHTML = "$0"
+    balanceContainer.style.background = "lightgray";
+  }
+
 });
