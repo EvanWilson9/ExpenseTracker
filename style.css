@@ -44,7 +44,7 @@ body {
   font-weight: bold;
 }
 
-.add-btn {
+.btn {
   padding: 10px 20px;
   border-radius: 9px;
   border: none;
@@ -184,7 +184,7 @@ body {
   gap: 45px;
 }
 
-.balance {
+.balanceContainer {
   background-color: lightgray;
   width: 250px;
   height: 250px;
@@ -372,8 +372,10 @@ body {
   width:800px;
   padding:20px;
   border-radius: 9px;
-  justify-content: space-between;
+  justify-content: start;
+  gap:200px;
   margin-top:20px;
+  background-color: lightgray;
 }
 
 .work-expense {
@@ -381,22 +383,40 @@ body {
 }
 
 span{
-  color:red;
+  display: flex;
+  justify-content: center;
+  color:black;
   cursor: pointer;
   font-size:20px;
+  width:50px;
+  border-radius: 9px;
+}
+
+span:hover{
+  background-color: white;
 }
 
 span:hover{
   font-weight: bold;
 }
 
-.expense-info{
-  display: flex;
-  gap:150px;
-  margin-left: 50px;;
-}
-
 .overview-number{
   display: flex;
 }
 
+ul li{
+  list-style-type: none;
+  position: relative;
+  display: flex;
+}
+
+ul li span{
+  position: absolute;
+  right:20px;
+  top:50%;
+}
+
+.list-container{
+  display: flex;
+  flex-direction: column;
+}
