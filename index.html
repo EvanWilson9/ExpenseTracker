@@ -38,10 +38,10 @@
     </div>
     <div class="total-container">
       <div class="balance-title">BALANCE</div>
-      <div class="balance"><div id="current-balance"></div></div>
+      <div class="balanceContainer"><div class="balance-amount"></div></div>
       <div class="balance-description-container">
-        <div class="balance-description" id="positive">You are in the positive, keep it up!</div>
-        <div class="balance-description" id="negative">You are in the negative, watch out!</div>
+        <div class="balance-description" id="positive"></div>
+  
       </div>
     </div>
     <div class="goals-container">
@@ -84,7 +84,7 @@
       </div>
       <div class="amount-container">
         <div class="title">Amount</div>
-        <input type="text" class="amount-input" placeholder="Amount">
+        <input type="text" class="amount-input" placeholder="Amount (-)">
       </div>
       <div>
         <select name="" id="" class="category-selection">
@@ -96,11 +96,11 @@
         </select>
       </div>
       <div>
-        <button class="add-btn">Add</button>
+        <button class="btn">Add</button>
       </div>
     </div>
     <div class="expense-container">
-      <ul></ul>
+      <ul class="list-container"></ul>
     </div>
   </div>
   <script src="script.js"></script>
